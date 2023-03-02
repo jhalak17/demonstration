@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Events</title>
+</head>
+<body>
+    {% if error_message %}
+    <h1>{{error_message}}</h1>
+    {% else %}
+        <table>
+            <tr>
+            <tr class="table100-head">
+            <th class="column1">Performer</th>
+            <th class="column1">Event Name</th>
+            <th class="column2">Venue</th>
+            <th class="column3">Min Price</th>
+            <th class="column4">Date</th>
+            <th class="column5">Website</th>
+            </tr>
+
+
+            {% for event in response_event_list %}
+                <tr>
+                <td class="column1">{{event.performer_name}}</td>    
+                <td class="column1">{{event.event_name}}</td>
+                <td class="column2">{{event.venue_name}}</td>
+                <td class="column3">{{event.min_price}} {{event.currency}}</td>
+                <td class="column4">{{event.event_date}}</td>
+                <td class="column5">{{event.ticket_company}}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    {% endif %}
+</body>
+</html>
