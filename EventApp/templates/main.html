@@ -114,30 +114,30 @@ form.example::after {
       <br>
       <h3>Family</h3>
     </div>
-  </div>
+</div>
 
   <h2>Top Choices - Venue</h2>
 
 
   <div class="row">
-    {% for venue in suggestion_response.venue_list %}
+    {% for venues in suggestion_response.venue_list %}
     <div class="column2">
-      <img src={{venue.venue_image}} alt="Nature" style="width:100%">
+      <a href="venue?venue_id={{venues.venue_id}}"><img src={{venues.venue_image}} alt="Nature" style="width:100%"></a>
       <br>
-      <h4>{{venue.venue_name}}</h4>
-      <p>{{venue.venue_upcoming_event}} Events</p>
+      <h4>{{venues.venue_name}}</h4>
+      <p>{{venues.venue_upcoming_event}} Upcoming Events</p>
     </div>
     {% endfor%}
   </div>
 
   <h2>Top Attraction</h2>
   <div class="row">
-    {% for attraction in suggestion_response.attraction_list %}
+    {% for attractions in suggestion_response.attraction_list %}
     <div class="column2">
-      <img src={{attraction.attr_image}} alt="Nature" style="width:100%">
+      <a href="attraction?attraction_id={{attractions.attr_id}}"><img src={{attractions.attr_image}} alt="Nature" style="width:100%"></a>
       <br>
-      <h4>{{attraction.attr_name}}</h4>
-      <p>{{attraction.attr_upcoming_event}} Events</p>
+      <h4>{{attractions.attr_name}}</h4>
+      <p>{{attractions.attr_upcoming_event}} Upcoming Events</p>
     </div>
     {% endfor%}
   </div>

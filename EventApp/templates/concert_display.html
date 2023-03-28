@@ -3,91 +3,63 @@
 <head>
     <title>Concerts</title>
     <style>
-        body {
-            font: 16px Arial, Verdana, Tahoma, Sans-serif;
-          }
-          
-          .container {
-            width: 852px;
-            background: #ccc;
-            margin: 0 auto;
-            padding: 16px;
-          }
-          
-          .wrapper {
-            margin: 8px 0;
-          }
-          
-          .search-container {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-content: stretch;
-            align-items: flex-start;
-          }
-          
-          input {
-            min-width: 20px;
-            padding: 8px;
-            margin: 0 4px 0 0;
-            border: 1px solid #666;
-            border-radius: 5px;
-            height: 30px;
-          }
-          
-          .button {
-            padding: 8px 16px;
-            min-height: 48px;
-            min-width: 10px;
-            word-wrap: nowrap;
-            background: #000;
-            color: #fff;
-            border: 1px solid #fff;
-            border-radius: 5px;
-          }
-          
-          input {
-              order: 0;
-              align-self: auto;  
-          }
-          
-          .search {
-            flex: 2 1 auto;
-          }
-          
-          .date-from {
-            flex: 1 1 auto;
-          }
-          
-          .date-to {
-            flex: 1 1 auto;
-          }
-          
-          .button {
-              order: 4;
-              flex: 0 1 auto;
-              align-self: auto;
-          }   
-        </style>    
+
+      form {
+        display: inline;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+      }
+      
+      label {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      
+      input[type="text"], select {
+        width: 300px;
+        height: 40px;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+      }
+      
+      input[type="submit"] {
+        width: 150px;
+        height: 40px;
+        background-color: #4CAF50;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #3e8e41;
+      }
+      
+        
+    </style>    
   
 </head>
 <body>
-    <div class="container">
-        <form>
-        
-          <div class="wrapper">
-            <p>English</p>
-            <div class="search-container">
-              <input type="text" class="search" placeholder="Artist or venue..">
-              <select class="date-from" name = "genres">
-                <option value="all">All Genres</option>
-                <option value="classical">Classical</option>
-                <option value="pop">Pop Songs</option>
-              <input type="text" class="date-to" placeholder="Number of people">
-              <button type="submit" class="button">Search</button>
-            </div>
-          </div> 
-        </form>
-        </div>
+    
+  <form>
+  
+    <input type="text" id="text-input" name="name" placeholder="Search for Artist or Venue">
+    
+
+    <select id="dropdown-input" name="gener">
+      <option value="all">All Genre</option>
+      <option value="pop">Pop</option>
+      <option value="rock">Rock</option>
+    </select>
+    
+    <input type="submit" value="Submit">
+  </form>
+
 </body>

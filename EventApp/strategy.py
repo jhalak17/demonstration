@@ -20,7 +20,7 @@ def get_event_detail_by_searchword(search_word):
     pass
 
 def get_suggestion_list():
-    url = "https://app.ticketmaster.com/discovery/v2/suggest?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&locale=*"
+    url = "https://app.ticketmaster.com/discovery/v2/suggest?sort=relevance,desc&apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&locale=*"
 
     response = requests.request("GET", url)
     response_body = response.json()
