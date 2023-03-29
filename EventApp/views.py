@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
-from .multiprocess import get_event_ticketmaster, get_venue_ticketmaster, get_attraction_ticketmaster
+from .multiprocess import get_event_ticketmaster, get_venue_ticketmaster, get_attraction_ticketmaster, get_classification_search_result
 from .strategy import get_suggestion_list
 
 # Create your views here.
@@ -24,7 +24,14 @@ class Search_Event(View):
 # Concert function       
 def get_concert_page(request):
     print(request.GET)
-    return render(request, 'concert_display.html')
+    classification_id = request.GET.get('id')
+    print("classification_id ======= ",classification_id, type(classification_id))
+    search_response = get_classification_search_result(classification_id)
+    if "error_message" in search_response:
+        return render(request, 'searchresult.html',{"error_message":"No record found !!!!"})   
+    else:
+        return render(request, 'concert_display.html', {"response_event_list":search_response})
+    # return render(request, 'concert_display.html')
 
 def get_venue_page(request):
     print(request.GET)
