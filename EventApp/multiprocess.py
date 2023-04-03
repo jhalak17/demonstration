@@ -1,8 +1,8 @@
 import requests, json
 
-def get_event_ticketmaster(searchword):
+def get_event_ticketmaster(searchword, search_city):
 
-    url = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&locale=*&sort=date,asc&keyword="+searchword
+    url = "https://app.ticketmaster.com/discovery/v2/events?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&locale=*&sort=date,asc&keyword="+searchword+"&city="+search_city
     response = requests.request("GET", url)
     response_body = response.json()
     if "page" in response_body.keys():
@@ -17,6 +17,7 @@ def get_event_ticketmaster(searchword):
             event_name = event["name"]
             event_image = event["images"][1]["url"]
             event_date = event["dates"]["start"]["localDate"]
+            event_url = event["url"]
             event_timezone = event["dates"]["timezone"] if "timezone" in event["dates"].keys() else "-"
             if "priceRanges" in event.keys():
                 price_range = event["priceRanges"]
@@ -29,9 +30,8 @@ def get_event_ticketmaster(searchword):
             venue_name = event_venue[0]["name"] if event_venue else "-"
             event_attraction = event["_embedded"]["attractions"] if "attractions" in event["_embedded"].keys() else None
             performer_name = event_attraction[0]["name"] if event_attraction else "-"
-            event_response_list.append(dict(ticket_company=ticket_company, event_id=event_id, event_name=event_name, event_image=event_image, event_date=event_date, event_timezone=event_timezone, min_price=min_price, currency=currency, venue_name=venue_name, performer_name=performer_name))
+            event_response_list.append(dict(ticket_company=ticket_company,searchword=searchword, event_id=event_id, event_url=event_url, event_name=event_name, event_image=event_image, event_date=event_date, event_timezone=event_timezone, min_price=min_price, currency=currency, venue_name=venue_name, performer_name=performer_name))
         except:
-            print("*********** exception occured ************")
             continue
 
     return event_response_list
@@ -53,6 +53,7 @@ def get_venue_ticketmaster(searchword):
             event_name = event["name"]
             event_image = event["images"][1]["url"]
             event_date = event["dates"]["start"]["localDate"]
+            event_url = event["url"]
             event_timezone = event["dates"]["timezone"] if "timezone" in event["dates"].keys() else "-"
             if "priceRanges" in event.keys():
                 price_range = event["priceRanges"]
@@ -65,9 +66,8 @@ def get_venue_ticketmaster(searchword):
             venue_name = event_venue[0]["name"] if event_venue else "-"
             event_attraction = event["_embedded"]["attractions"] if "attractions" in event["_embedded"].keys() else None
             performer_name = event_attraction[0]["name"] if event_attraction else "-"
-            event_response_list.append(dict(ticket_company=ticket_company, event_id=event_id, event_name=event_name, event_image=event_image, event_date=event_date, event_timezone=event_timezone, min_price=min_price, currency=currency, venue_name=venue_name, performer_name=performer_name))
+            event_response_list.append(dict(ticket_company=ticket_company, event_id=event_id, event_url=event_url, event_name=event_name, event_image=event_image, event_date=event_date, event_timezone=event_timezone, min_price=min_price, currency=currency, venue_name=venue_name, performer_name=performer_name))
         except:
-            print("*********** exception occured ************")
             continue
 
     return event_response_list
@@ -89,6 +89,7 @@ def get_attraction_ticketmaster(searchword):
             event_name = event["name"]
             event_image = event["images"][1]["url"]
             event_date = event["dates"]["start"]["localDate"]
+            event_url = event["url"]
             event_timezone = event["dates"]["timezone"] if "timezone" in event["dates"].keys() else "-"
             if "priceRanges" in event.keys():
                 price_range = event["priceRanges"]
@@ -101,9 +102,8 @@ def get_attraction_ticketmaster(searchword):
             venue_name = event_venue[0]["name"] if event_venue else "-"
             event_attraction = event["_embedded"]["attractions"] if "attractions" in event["_embedded"].keys() else None
             performer_name = event_attraction[0]["name"] if event_attraction else "-"
-            event_response_list.append(dict(ticket_company=ticket_company, event_id=event_id, event_name=event_name, event_image=event_image, event_date=event_date, event_timezone=event_timezone, min_price=min_price, currency=currency, venue_name=venue_name, performer_name=performer_name))
+            event_response_list.append(dict(ticket_company=ticket_company, event_id=event_id, event_url=event_url, event_name=event_name, event_image=event_image, event_date=event_date, event_timezone=event_timezone, min_price=min_price, currency=currency, venue_name=venue_name, performer_name=performer_name))
         except:
-            print("*********** exception occured ************")
             continue
 
     return event_response_list
@@ -125,6 +125,7 @@ def get_classification_search_result(id):
             event_name = event["name"]
             event_image = event["images"][1]["url"]
             event_date = event["dates"]["start"]["localDate"]
+            event_url = event["url"]
             event_timezone = event["dates"]["timezone"] if "timezone" in event["dates"].keys() else "-"
             if "priceRanges" in event.keys():
                 price_range = event["priceRanges"]
@@ -137,9 +138,8 @@ def get_classification_search_result(id):
             venue_name = event_venue[0]["name"] if event_venue else "-"
             event_attraction = event["_embedded"]["attractions"] if "attractions" in event["_embedded"].keys() else None
             performer_name = event_attraction[0]["name"] if event_attraction else "-"
-            event_response_list.append(dict(ticket_company=ticket_company, event_id=event_id, event_name=event_name, event_image=event_image, event_date=event_date, event_timezone=event_timezone, min_price=min_price, currency=currency, venue_name=venue_name, performer_name=performer_name))
+            event_response_list.append(dict(ticket_company=ticket_company, event_id=event_id, event_url=event_url, event_name=event_name, event_image=event_image, event_date=event_date, event_timezone=event_timezone, min_price=min_price, currency=currency, venue_name=venue_name, performer_name=performer_name))
         except:
-            print("*********** exception occured ************")
             continue
 
     return event_response_list

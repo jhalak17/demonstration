@@ -16,10 +16,7 @@ def get_classifications():
         classifications.append({"class_id":class_id,"class_name":class_name})
     return classifications
 
-def get_event_detail_by_searchword(search_word):
-    pass
-
-def get_suggestion_list():
+def get_suggestion_list(state):
     url = "https://app.ticketmaster.com/discovery/v2/suggest?sort=relevance,desc&apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&locale=*"
 
     response = requests.request("GET", url)

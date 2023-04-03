@@ -2,7 +2,7 @@
 <html >
 <head>
   <meta charset="UTF-8">
-  <title>Responsive Table + Detail View</title>
+  <title>Search Result Display</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
@@ -257,7 +257,7 @@ dd {
 
 <body>
 <main>
-  <table>
+  <table id = "example">
     <thead>
       <tr>
         <th class="column1">Performer</th>
@@ -266,12 +266,13 @@ dd {
         <th class="column3">Min Price</th>
         <th class="column4">Date</th>
         <th class="column5">Website</th>
+        <th class="column6">Redirect</th>
       </tr>
     </thead>
-    <tfoot>
+    {% comment %} <tfoot>
       <tr>
       </tr>
-    </tfoot>
+    </tfoot> {% endcomment %}
     <tbody>
       <tr>
         {% for event in response_event_list %}
@@ -283,7 +284,7 @@ dd {
                 <td class="column4">{{event.event_date}}</td>
                 <td class="column5">{{event.ticket_company}}</td>
                 <td class='select'>
-                  <a class='button' href='#'>
+                  <a class='button' href={{event.event_url}}>
                     Select
                   </a>
                 </td>
@@ -294,6 +295,15 @@ dd {
     </tbody>
     </table>
 </main>
+
+<script src = "https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src = "https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src = "https:>//cdn.datatables.net/1.13.4/js/dataTables.bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+    $('#example').DataTable();
+    });
+</script>
 
 </body>
 </html>
