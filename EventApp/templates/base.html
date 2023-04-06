@@ -58,40 +58,40 @@
         body {
             font-family: Arial;
           }
-          
+
           * {
             box-sizing: border-box;
           }
-          
+
           /* The grid: Four equal columns that floats next to each other */
           .column {
             float: left;
             width: 15%;
             padding: 10px;
           }
-          
+
           /* Style the images inside the grid */
           .column img {
-            opacity: 0.8; 
-            cursor: pointer; 
+            opacity: 0.8;
+            cursor: pointer;
             height: 150px;
           }
-          
+
           /* The grid: Four equal columns that floats next to each other */
           .column2 {
             float: left;
             width: 20%;
             padding: 10px;
           }
-          
+
           /* Style the images inside the grid */
           .column2 img {
-            opacity: 0.8; 
-            cursor: pointer; 
+            opacity: 0.8;
+            cursor: pointer;
             height: 200px;
             border: 0.4px solid;
           }
-          
+
           /* Clear floats after the columns */
           .row:after {
             content: "";
@@ -108,7 +108,9 @@
 	<form action = "" method="post">
         {% csrf_token %}
 		<input type="text" id="name" name="search_word" placeholder="Search for artist or event">
-		<input type="text" id="city" name="search_city" placeholder="Enter your city" value = "{{state}}"">
+		<input type="text" id="city" name="search_city" placeholder="Enter your city" >
+
+		<!--<input type="text" id="city" name="search_city" placeholder="Enter your city" value = "{{state}}"">-->
 
 		<input type="submit" value="Submit">
 	</form>
@@ -164,6 +166,67 @@
     </div>
     {% endfor%}
   </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script>
+window.addEventListener("load", (event) => {
+  console.log("page is fully loaded");
+  getLocation()
+});
+
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+function showPosition(position) {
+  console.log("Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude);
+  var lat = position.coords.latitude
+  var long = position.coords.longitude
+  getCity(lat,long)
+}
+
+function getCity(lat,long) {
+    var formData = {
+            'lat': lat,
+            'long': long,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/getCity',
+            data: formData,
+            encode: true
+        })
+
+            .done(function (data1) {
+                data = JSON.parse(data1);
+                console.log("data fetched from views = "+data1)
+                if (data['status'] = 'success' ) {
+                    place = data['city'] + ', ' + data['district'] + ", " + data['state'] + ','+ data['country']
+                    document.getElementById('city').value = place
+                }
+                else{
+                    console.log('failure')
+                }
+
+            });
+    };
+
+
+
+
+</script>
+
+
+
 
 </body>
 </html>

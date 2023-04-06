@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Search Result Display</title>
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-  
+
   <style>
    * {
   box-sizing: border-box;
@@ -249,10 +249,10 @@ dd {
     padding: 10px;
   }
 }
- 
+
   </style>
 
-  
+
 </head>
 
 <body>
@@ -269,15 +269,14 @@ dd {
         <th class="column6">Redirect</th>
       </tr>
     </thead>
-    {% comment %} <tfoot>
-      <tr>
-      </tr>
-    </tfoot> {% endcomment %}
+    <!--{% comment %} <tfoot>-->
+    <!--  <tr>-->
+    <!--  </tr>-->
+    <!--</tfoot> {% endcomment %}-->
     <tbody>
-      <tr>
         {% for event in response_event_list %}
                 <tr>
-                <td class="column1">{{event.performer_name}}</td>    
+                <td class="column1">{{event.performer_name}}</td>
                 <td class="column1">{{event.event_name}}</td>
                 <td class="column2">{{event.venue_name}}</td>
                 <td class="column3">{{event.min_price}} {{event.currency}}</td>
@@ -290,8 +289,7 @@ dd {
                 </td>
                 </tr>
             {% endfor %}
-        
-      </tr>
+
     </tbody>
     </table>
 </main>
